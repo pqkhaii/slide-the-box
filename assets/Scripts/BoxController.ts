@@ -3,143 +3,99 @@ const { ccclass, property } = _decorator;
 
 @ccclass('BoxController')
 export class BoxController extends Component {
-    @property({
-        type: Prefab
-    })
+    @property({type: Prefab})
     private boxLeft: Prefab = null;
 
-    @property({
-        type: Prefab
-    })
+    @property({type: Prefab})
     private boxRight: Prefab = null;
 
-    @property({
-        type: Node
-    })
-    private boxNode: Node = null;
+    @property({type: Node})
+    public boxNode: Node = null;
 
-    private box: Node[] = [];
+    public box: Node[] = [];
     // private box: Node = null;
 
-    private boxPool: Node[] = [];
+    public boxPool: Node[] = [];
    
 
-    private amoutToBox: number = 10;
+    public amoutToBox: number = 6;
+
+    private check: string;
+
+    // private isCreateBox: boolean = false
     
 
     protected start(): void {
        this.createBox();
+       this.boxPool[0].destroy();
     }
 
     protected update(deltaTime: number): void {
-        
+        // this.resetBox();
     }
 
-    protected createBox(): void {
-        
-        for(let i = 0; i<this.amoutToBox; i++){
+    // protected resetBox(): void {
+    //     for(let i = 0; i<this.amoutToBox; i++){
+    //         var posX = this.box[i].position.x;           
+    //         var posY = this.box[i].position.y;
+    //         if(posX < -550 ){
+    //             posX = 0
+    //             posY = 380;
+    //         }
+    //         this.box[i].setPosition(posX, posY, 0);
+    //     }
+    // }
 
-            let random = randomRangeInt(1,5)
+    protected createBox(): void {
+        let i = 0;
+        this.schedule(() => {
+            ++i;
+            let random = randomRangeInt(1,5);
             if(random === 1 || random === 3 || random === 5){
                 this.box[i] = instantiate(this.boxLeft);
                 this.boxNode.addChild(this.box[i]);
+                // this.boxNode.setSiblingIndex(i);
             }
-            else{
+            
+            if(random === 2){
                 this.box[i] = instantiate(this.boxRight);
                 this.boxNode.addChild(this.box[i]);
+                // this.boxNode.setSiblingIndex(i);
+            }
+
+            // var posX = this.box[i].position.x;           
+            // var posY = this.box[i].position.y;
+
+            // this.box[i].setPosition(0.0, 230, 0.0);
+            this.boxPool.push(this.box[i]);
+        }, 0.1, this.amoutToBox);
+
+        /*
+        for(let i = 0; i<this.amoutToBox; i++){
+
+            let random = randomRangeInt(1,3);
+            if(random === 1 || random === 3){
+                this.box[i] = instantiate(this.boxLeft);
+                this.boxNode.addChild(this.box[i]);
+                // this.boxNode.setSiblingIndex(i);
+            }
+            
+            if(random === 2){
+                this.box[i] = instantiate(this.boxRight);
+                this.boxNode.addChild(this.box[i]);
+                // this.boxNode.setSiblingIndex(i);
             }
 
             var posX = this.box[i].position.x;           
             var posY = this.box[i].position.y;
-            
-            console.log(posX);
-            console.log(posY);
-
-            posX = 0;
-            posY = 0;
 
             this.box[i].setPosition(posX, posY, 0);
+            this.boxPool.push(this.box[i]);
         }
-        
-        ///////////////////////////////////////////////
-        // for(let i = 0; i < 8; i ++){
-        //     let random = randomRangeInt(1,5)
-        //     if(random === 1 || random === 3 || random === 5){
-        //         this.createBoxLeft();
-        //     }
-        //     else{
-        //         this.createBoxRight();
-        //     }
-        // }
+        */
+
+        console.log(this.boxPool)
     }
-
-    // public createBoxLeft(): void {
-    //     this.box = instantiate(this.boxLeft);
-    //     this.boxNode.addChild(this.box);
-
-    //     var posX = this.box.position.x;           
-    //     var posY = this.box.position.y;
-
-    //     posX = 0;
-    //     posY = 0;
-
-    //     this.box.setPosition(posX, posY, 0);
-    // }
-
-    // public createBoxRight(): void {
-
-    //     this.box = instantiate(this.boxRight);
-    //     this.boxNode.addChild(this.box);
-
-    //     var posX = this.box.position.x;           
-    //     var posY = this.box.position.y;
-        
-    //     console.log(posX);
-    //     console.log(posY);
-
-    //     posX = 0;
-    //     posY = 0;
-
-    //     this.box.setPosition(posX, posY, 0);
-    // }
-
-
-
-    // protected createBoxLeft(): void {
-    //     for(let i = 0; i<this.amoutToBox-5; i++){
-    //         this.box[i] = instantiate(this.boxLeft);
-    //         this.boxNode.addChild(this.box[i]);
-
-    //         var posX = this.box[i].position.x;           
-    //         var posY = this.box[i].position.y;
-            
-    //         console.log(posX);
-    //         console.log(posY);
-
-    //         posX = 0;
-    //         posY = 0;
-
-    //         this.box[i].setPosition(posX, posY, 0);
-    //     }
-    // }
-
-    // protected createBoxRight(): void {
-    //     for(let i = 0; i<this.amoutToBox-5; i++){
-    //         this.box[i] = instantiate(this.boxRight);
-    //         this.boxNode.addChild(this.box[i]);
-
-    //         var posX = this.box[i].position.x;           
-    //         var posY = this.box[i].position.y;
-            
-    //         console.log(posX);
-    //         console.log(posY);
-
-    //         posX = 0;
-    //         posY = 0;
-
-    //         this.box[i].setPosition(posX, posY, 0);
-    //     }
-    // }
 }
 
 
