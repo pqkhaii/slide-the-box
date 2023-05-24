@@ -18,53 +18,90 @@ export class BoxController extends Component {
     })
     private boxNode: Node = null;
 
-    // private box: Node[] = [];
-    private box: Node = null;
+    private box: Node[] = [];
+    // private box: Node = null;
+
+    private boxPool: Node[] = [];
    
 
     private amoutToBox: number = 10;
     
 
     protected start(): void {
-        
+       this.createBox();
     }
 
     protected update(deltaTime: number): void {
         
     }
 
-    public createBoxLeft(): void {
-        this.box = instantiate(this.boxLeft);
-        this.boxNode.addChild(this.box);
-
-        var posX = this.box.position.x;           
-        var posY = this.box.position.y;
+    protected createBox(): void {
         
-        console.log(posX);
-        console.log(posY);
+        for(let i = 0; i<this.amoutToBox; i++){
 
-        posX = 0;
-        posY = 0;
+            let random = randomRangeInt(1,5)
+            if(random === 1 || random === 3 || random === 5){
+                this.box[i] = instantiate(this.boxLeft);
+                this.boxNode.addChild(this.box[i]);
+            }
+            else{
+                this.box[i] = instantiate(this.boxRight);
+                this.boxNode.addChild(this.box[i]);
+            }
 
-        this.box.setPosition(posX, posY, 0);
+            var posX = this.box[i].position.x;           
+            var posY = this.box[i].position.y;
+            
+            console.log(posX);
+            console.log(posY);
+
+            posX = 0;
+            posY = 0;
+
+            this.box[i].setPosition(posX, posY, 0);
+        }
+        
+        ///////////////////////////////////////////////
+        // for(let i = 0; i < 8; i ++){
+        //     let random = randomRangeInt(1,5)
+        //     if(random === 1 || random === 3 || random === 5){
+        //         this.createBoxLeft();
+        //     }
+        //     else{
+        //         this.createBoxRight();
+        //     }
+        // }
     }
 
-    public createBoxRight(): void {
+    // public createBoxLeft(): void {
+    //     this.box = instantiate(this.boxLeft);
+    //     this.boxNode.addChild(this.box);
 
-        this.box = instantiate(this.boxRight);
-        this.boxNode.addChild(this.box);
+    //     var posX = this.box.position.x;           
+    //     var posY = this.box.position.y;
 
-        var posX = this.box.position.x;           
-        var posY = this.box.position.y;
+    //     posX = 0;
+    //     posY = 0;
+
+    //     this.box.setPosition(posX, posY, 0);
+    // }
+
+    // public createBoxRight(): void {
+
+    //     this.box = instantiate(this.boxRight);
+    //     this.boxNode.addChild(this.box);
+
+    //     var posX = this.box.position.x;           
+    //     var posY = this.box.position.y;
         
-        console.log(posX);
-        console.log(posY);
+    //     console.log(posX);
+    //     console.log(posY);
 
-        posX = 0;
-        posY = 0;
+    //     posX = 0;
+    //     posY = 0;
 
-        this.box.setPosition(posX, posY, 0);
-    }
+    //     this.box.setPosition(posX, posY, 0);
+    // }
 
 
 
