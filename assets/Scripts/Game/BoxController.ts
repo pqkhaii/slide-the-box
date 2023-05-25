@@ -1,4 +1,4 @@
-import { _decorator, Component, instantiate, Node, Prefab, randomRange, randomRangeInt } from 'cc';
+import { _decorator, Component, instantiate, Node, Prefab, randomRange, randomRangeInt, Sprite } from 'cc';
 const { ccclass, property } = _decorator;
 
 import { Constants } from './Constants';
@@ -25,10 +25,19 @@ export class BoxController extends Component {
     }
 
     protected update(deltaTime: number): void {
+        // for(let i = 0; i<Constants.numberOfBox; i++){
+        //     var posX = this.box[i].position.x;          
+        //     var posY = this.box[i].position.y;
+            
+        //     posX = 0
+        //     posY -=10;
 
+        //     this.box[i].setPosition(posX, posY, 0);
+        // }
     }
 
     public createBox(): void {
+        
         let i = 0;
 
         this.schedule(() => {
@@ -46,9 +55,9 @@ export class BoxController extends Component {
                 this.check.push(0);
             }
         }, 0.3, Constants.numberOfBox);
-
-        /*
-        for(let i = 0; i<this.amoutToBox; i++){
+        
+        /**
+        for(let i = 0; i<Constants.numberOfBox; i++){
 
             let random = randomRangeInt(1,3);
             if(random === 1 || random === 3){
@@ -57,42 +66,46 @@ export class BoxController extends Component {
                 // this.boxNode.setSiblingIndex(i);
             }
             
-            if(random === 2){
+            else{
                 this.box[i] = instantiate(this.boxRight);
                 this.boxNode.addChild(this.box[i]);
                 // this.boxNode.setSiblingIndex(i);
             }
 
-            var posX = 0          
-            var posY = 200
+            var posX = this.box[i].position.x;          
+            var posY = this.box[i].position.y;
+            
+            posX = 0
+            posY = 0;
 
             this.box[i].setPosition(posX, posY, 0);
             // this.boxPool.push(this.box[i]);
         }
-        */
+        **/
     }
 
     public createNewBox(): void{
         let random = randomRangeInt(1,5)
-            if(random === 1 || random === 3 || random === 5){
-                this.boxNew = instantiate(this.boxLeft);
-                this.boxNode.addChild(this.boxNew);
-                this.check.push(1);
-            }
-            else{
-                this.boxNew = instantiate(this.boxRight);
-                this.boxNode.addChild(this.boxNew);
-                this.check.push(0);
-            }
-            
-            var posX = this.boxNew.position.x;           
-            var posY = this.boxNew.position.y;
-            
-            posX = 0;
-            posY = 350;
-            
-            this.boxNew.setPosition(posX, posY, 0);
-            this.box.push(this.boxNew);
+
+        if(random === 1 || random === 3 || random === 5){
+            this.boxNew = instantiate(this.boxLeft);
+            this.boxNode.addChild(this.boxNew);
+            this.check.push(1);
+        }
+        else{
+            this.boxNew = instantiate(this.boxRight);
+            this.boxNode.addChild(this.boxNew);
+            this.check.push(0);
+        }
+        
+        var posX = this.boxNew.position.x;           
+        var posY = this.boxNew.position.y;
+        
+        posX = 0;
+        posY = 350;
+        
+        this.boxNew.setPosition(posX, posY, 0);
+        this.box.push(this.boxNew);
     }
 }
 
