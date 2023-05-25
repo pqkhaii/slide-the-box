@@ -15,86 +15,97 @@ export class BoxController extends Component {
     public box: Node[] = [];
     // private box: Node = null;
 
-    public boxPool: Node[] = [];
-   
+    // public boxPool: Node[] = [];
+    
+    private boxNew: Node;
 
     public amoutToBox: number = 6;
 
-    private check: string;
+    public check: number[] = [];
 
     // private isCreateBox: boolean = false
     
+    protected onLoad(): void {
+        
+    }
 
     protected start(): void {
-       this.createBox();
-       this.boxPool[0].destroy();
+        this.createBox();
     }
 
     protected update(deltaTime: number): void {
-        // this.resetBox();
+
     }
 
-    // protected resetBox(): void {
-    //     for(let i = 0; i<this.amoutToBox; i++){
-    //         var posX = this.box[i].position.x;           
-    //         var posY = this.box[i].position.y;
-    //         if(posX < -550 ){
-    //             posX = 0
-    //             posY = 380;
-    //         }
-    //         this.box[i].setPosition(posX, posY, 0);
-    //     }
-    // }
 
     protected createBox(): void {
         let i = 0;
         this.schedule(() => {
             ++i;
+            console.log('countI',i)
             let random = randomRangeInt(1,5);
+            if(random === 1 || random === 3 || random === 5){ // 
+                this.box[i] = instantiate(this.boxLeft);
+                this.boxNode.addChild(this.box[i]);
+                this.check.push(1);
+            }
+            
+            else{ // || random === 4
+                this.box[i] = instantiate(this.boxRight);
+                this.boxNode.addChild(this.box[i]);
+                this.check.push(0);
+            }
+        }, 0.5, this.amoutToBox);
+
+        
+        // for(let i = 0; i<this.amoutToBox; i++){
+
+        //     let random = randomRangeInt(1,3);
+        //     if(random === 1 || random === 3){
+        //         this.box[i] = instantiate(this.boxLeft);
+        //         this.boxNode.addChild(this.box[i]);
+        //         // this.boxNode.setSiblingIndex(i);
+        //     }
+            
+        //     if(random === 2){
+        //         this.box[i] = instantiate(this.boxRight);
+        //         this.boxNode.addChild(this.box[i]);
+        //         // this.boxNode.setSiblingIndex(i);
+        //     }
+
+        //     var posX = 0          
+        //     var posY = 200
+
+        //     this.box[i].setPosition(posX, posY, 0);
+        //     // this.boxPool.push(this.box[i]);
+        // }
+        
+
+        console.log(this.box)
+        console.log(this.check)
+    }
+
+    public createNewBox(): void{
+        let random = randomRangeInt(1,5)
             if(random === 1 || random === 3 || random === 5){
-                this.box[i] = instantiate(this.boxLeft);
-                this.boxNode.addChild(this.box[i]);
-                // this.boxNode.setSiblingIndex(i);
+                this.boxNew = instantiate(this.boxLeft);
+                this.boxNode.addChild(this.boxNew);
+                this.check.push(1);
+            }
+            else{
+                this.boxNew = instantiate(this.boxRight);
+                this.boxNode.addChild(this.boxNew);
+                this.check.push(0);
             }
             
-            if(random === 2){
-                this.box[i] = instantiate(this.boxRight);
-                this.boxNode.addChild(this.box[i]);
-                // this.boxNode.setSiblingIndex(i);
-            }
-
-            // var posX = this.box[i].position.x;           
-            // var posY = this.box[i].position.y;
-
-            // this.box[i].setPosition(0.0, 230, 0.0);
-            this.boxPool.push(this.box[i]);
-        }, 0.1, this.amoutToBox);
-
-        /*
-        for(let i = 0; i<this.amoutToBox; i++){
-
-            let random = randomRangeInt(1,3);
-            if(random === 1 || random === 3){
-                this.box[i] = instantiate(this.boxLeft);
-                this.boxNode.addChild(this.box[i]);
-                // this.boxNode.setSiblingIndex(i);
-            }
+            var posX = this.boxNew.position.x;           
+            var posY = this.boxNew.position.y;
             
-            if(random === 2){
-                this.box[i] = instantiate(this.boxRight);
-                this.boxNode.addChild(this.box[i]);
-                // this.boxNode.setSiblingIndex(i);
-            }
-
-            var posX = this.box[i].position.x;           
-            var posY = this.box[i].position.y;
-
-            this.box[i].setPosition(posX, posY, 0);
-            this.boxPool.push(this.box[i]);
-        }
-        */
-
-        console.log(this.boxPool)
+            posX = 0;
+            posY = 450;
+            
+            this.boxNew.setPosition(posX, posY, 0);
+            this.box.push(this.boxNew);
     }
 }
 
