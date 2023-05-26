@@ -1,7 +1,6 @@
-import { _decorator, CCInteger, Component, Label, Node, Sprite } from 'cc';
+import { _decorator, Component, Label} from 'cc';
 import { GameModel } from './GameModel';
 import { ResultController } from './ResultController';
-import { GameController } from './GameController';
 
 const { ccclass, property } = _decorator;
 

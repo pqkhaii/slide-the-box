@@ -1,7 +1,4 @@
-import { _decorator, AudioClip, AudioSource, Component, Node, sys } from 'cc';
-// import { ButtonController } from './ButtonController';
-import { Constants } from './Constants';
-import { GameModel } from './GameModel';
+import { _decorator, AudioClip, AudioSource, Component } from 'cc';
 
 const { ccclass, property } = _decorator;
 

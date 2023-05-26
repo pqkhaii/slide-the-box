@@ -1,9 +1,7 @@
-import { _decorator, AudioClip, AudioSource, BoxCollider2D, CCInteger, Collider2D, Component, director, Node, RigidBody2D, Sprite, sys } from 'cc';
+import { _decorator, Component, director} from 'cc';
 import { BoxController } from './BoxController';
 import { GameView } from './GameView';
-import { Constants } from './Constants';
 import { GameModel } from './GameModel';
-// import { ButtonController } from './ButtonController';
 import { AudioController } from './AudioController';
 
 const { ccclass, property } = _decorator;

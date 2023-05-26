@@ -2,9 +2,8 @@ import { _decorator, CCInteger, Component, director, Node, Sprite, sys } from 'c
 import { BoxController } from './BoxController';
 import { ResultController } from './ResultController';
 import { AudioController } from './AudioController';
-import { GameView } from './GameView';
 import { Constants } from './Constants';
-import { GameController } from './GameController';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('GameModel')
@@ -21,9 +20,6 @@ export class GameModel extends Component {
 
     @property({type: AudioController})
     private AudioController: AudioController;
-
-    // @property({type: GameController})
-    // private GameController: GameController;
 
     @property({type: Node})
     private BtnLeft: Node;
