@@ -1,5 +1,6 @@
 import { _decorator, Component, Label, Node, sys } from 'cc';
 import { Constants } from './Constants';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('ResultController')
@@ -9,7 +10,7 @@ export class ResultController extends Component {
     private labelScore: Label;
 
     @property({type: Label})
-    public labelMaxScore: Label;
+    public labelHighScore: Label;
 
     private scoreArray: number[] = [0];
     
@@ -24,7 +25,7 @@ export class ResultController extends Component {
             localStorage.setItem(Constants.keyScore, JSON.stringify(this.scoreArray))
         }
 
-        this.labelMaxScore.node.active = false;
+        this.labelHighScore.node.active = false;
     }
 
     protected updateScore(num: number): void {
@@ -42,14 +43,10 @@ export class ResultController extends Component {
         sys.localStorage.setItem(Constants.keyScore, JSON.stringify(this.scoreArray));
         var getScore = JSON.parse(sys.localStorage.getItem(Constants.keyScore));
 
-        this.labelMaxScore.string =`MAX SCORE: ${Math.max(...getScore)}`;
-        console.log('max score', Math.max(...getScore));
+        this.labelHighScore.string = `HIGH SCORE: ${Math.max(...getScore)}`;
         
-        this.labelMaxScore.node.active = true;
+        this.labelHighScore.node.active = true;
     }
 
-    // public hideResults(): void {
-    //     this.labelMaxScore.node.active = false;
-    // }
 }
 

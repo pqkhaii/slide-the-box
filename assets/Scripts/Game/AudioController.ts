@@ -1,6 +1,7 @@
 import { _decorator, AudioClip, AudioSource, Component, Node, sys } from 'cc';
 import { ButtonController } from './ButtonController';
 import { Constants } from './Constants';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('AudioController')
@@ -24,13 +25,8 @@ export class AudioController extends Component {
     }
 
     protected start(): void {
-        //-----handle audio
+        //-----handle load audio
         var getVolume = sys.localStorage.getItem(Constants.keyVolume);
-        
-        if(getVolume){
-            this.ButtonController.variableVolumeArray = JSON.parse(getVolume);
-            localStorage.setItem(Constants.keyScore, JSON.stringify(Constants.keyVolume))
-        }
 
         var convertVolume = parseInt([...getVolume].reverse()[1]);
         this.settingAudio(convertVolume);
@@ -53,5 +49,6 @@ export class AudioController extends Component {
     public settingAudio(n: number): void {
         this.audioSource.volume = n;
     }
+    
 }
 

@@ -1,9 +1,7 @@
 import { _decorator, CCInteger, Component, Label, Node, Sprite } from 'cc';
-import { GameController } from './GameController';
 import { GameModel } from './GameModel';
 import { ResultController } from './ResultController';
-import { ButtonController } from './ButtonController';
-import { HandleCaller } from './HandleCaller';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('GameView')
@@ -23,9 +21,6 @@ export class GameView extends Component {
    
     @property({type: GameModel})
     private GameModel: GameModel;
-
-    // @property({type: HandleCaller})
-    // private HandleCaller: HandleCaller;
 
     public isGameOver: boolean = false;
 

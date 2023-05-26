@@ -1,4 +1,4 @@
-import { _decorator, ButtonComponent, Component, director, find, Node } from 'cc';
+import { _decorator, Component, director } from 'cc';
 import { Constants } from '../Game/Constants';
 
 const { ccclass, property } = _decorator;
@@ -6,7 +6,7 @@ const { ccclass, property } = _decorator;
 @ccclass('EntryController')
 export class EntryController extends Component {
 
-    onTouchPlay(): void{
+    protected onTouchPlay(): void{
         director.loadScene(Constants.sceneGame);
     }
 

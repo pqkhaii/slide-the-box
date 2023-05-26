@@ -15,21 +15,11 @@ export class GameController extends Component {
     @property({type:AudioController})
     private AudioController: AudioController;
 
-    // @property({type: ResultController})
-    // private ResultController: ResultController
-
     @property({type: GameView})
     private GameView: GameView;
 
-    // @property({type: GameModel})
-    // private GameModel: GameModel;
-
     @property({type: ButtonController})
     private ButtonController: ButtonController;
-
-    protected onLoad(): void {
-        
-    }
 
     protected start(): void {
         this.gameStart();
@@ -42,7 +32,7 @@ export class GameController extends Component {
         }
     }
 
-    public gameStart(): void {
+    protected gameStart(): void {
         this.boxController.createBox();
         this.GameView.countDown();
 
