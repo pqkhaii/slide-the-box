@@ -5,6 +5,7 @@ import { Constants } from './Constants';
 import { GameController } from './GameController';
 import { GameView } from './GameView';
 import { GameModel } from './GameModel';
+import { SoundController } from './SoundController';
 const { ccclass, property } = _decorator;
 
 @ccclass('ButtonController')
@@ -15,6 +16,9 @@ export class ButtonController extends Component {
 
     @property({type: ResultController})
     private ResultController: ResultController;
+
+    @property({type:SoundController})
+    private SoundController: SoundController;
 
     // @property({type: GameController})
     // private GameController: GameController;
@@ -60,6 +64,8 @@ export class ButtonController extends Component {
             console.log("You lost!")
             this.GameView.isGameOver = true;
         }
+
+        this.SoundController.onAudio(1);
     }
 
     protected onTouchRight(): void {
@@ -77,15 +83,25 @@ export class ButtonController extends Component {
             console.log("You lost!")
             this.GameView.isGameOver = true;
         }
+
+        this.SoundController.onAudio(1);
     }
 
-    public onTouchTryAgain(): void {
+    protected onTouchTryAgain(): void {
         director.resume();
         this.GameModel.timer = 10;
         director.loadScene(Constants.sceneGame);
         this.GameView.isGameOver = false;
         this.GameView.btnTryAgain.active = false;
         this.GameView.bgGameOver.node.active = false;
+    }
+
+    protected onTouchOnAudio(): void {
+        this.SoundController.settingAudio(1);
+    }
+
+    protected onTouchOffAudio(): void {
+        this.SoundController.settingAudio(0);
     }
 }
 

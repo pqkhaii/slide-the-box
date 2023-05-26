@@ -48,11 +48,9 @@ export class GameView extends Component {
             this.labelTimer.node.active = true;
             this.labelTimer.string = `TIME: ${this.GameModel.timer}`;
         }
-        else if(this.GameModel.timer == 0){
+        
+        if(this.GameModel.timer == 0){
             this.isGameOver = true;
-        }
-        else{
-
         }
     }
 
