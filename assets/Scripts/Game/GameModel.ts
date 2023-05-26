@@ -7,7 +7,7 @@ export class GameModel extends Component {
     @property({type:CCInteger})
     public timer: number = 10;
 
-    // public get Timer ()  {
+    // public get Timer(): number {
     //     return this.timer;
     // }
     

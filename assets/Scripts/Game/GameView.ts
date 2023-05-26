@@ -2,6 +2,8 @@ import { _decorator, CCInteger, Component, Label, Node, Sprite } from 'cc';
 import { GameController } from './GameController';
 import { GameModel } from './GameModel';
 import { ResultController } from './ResultController';
+import { ButtonController } from './ButtonController';
+import { HandleCaller } from './HandleCaller';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameView')
@@ -22,10 +24,13 @@ export class GameView extends Component {
     @property({type: GameModel})
     private GameModel: GameModel;
 
+    // @property({type: HandleCaller})
+    // private HandleCaller: HandleCaller;
+
     public isGameOver: boolean = false;
 
     protected start(): void {
-        
+        this.labelTimer.node.active = false;
     }
 
     update(deltaTime: number) {
@@ -39,11 +44,16 @@ export class GameView extends Component {
     }
 
     protected checkOverTime(): void {
-        if(this.GameModel.timer == 0){
+        if(this.GameModel.timer <= 30){ //time: 33 is good
+            this.labelTimer.node.active = true;
+            this.labelTimer.string = `TIME: ${this.GameModel.timer}`;
+        }
+        else if(this.GameModel.timer == 0){
             this.isGameOver = true;
         }
-        
-        this.labelTimer.string = `TIME: ${this.GameModel.timer}`;
+        else{
+
+        }
     }
 
     public showGameOver():void {

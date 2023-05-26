@@ -30,36 +30,20 @@ export class ButtonController extends Component {
 
     @property({type: Node})
     private btnRight: Node;
-    
-    public get BtnLeft() : Node {
-        return this.btnLeft
-    }
-
-    public set BtnLeft(v : Node) {
-        this.btnLeft = v;
-    }
-    
-    public get BtnRight() : Node {
-        return this.BtnRight;
-    }
-
-    public set BtnRight(x : Node) {
-        this.btnRight = x;
-    }
-
-    //test//////////////////
+  
     protected onLoad(): void {
-        // this.btnLeft.active = false;
-        // this.btnRight.active = false;
+        this.btnLeft.active = false;
+        this.btnRight.active = false;
     }
 
     protected start(): void {
+
+        //delay button right - left
         this.schedule(()=>{
             this.btnLeft.active = true;
             this.btnRight.active = true;
-        },2,5)
+        },2.5,5)
     }
-    ///////////////////////
 
     protected onTouchLeft(event:Event , customEventData: String): void {
         if(this.BoxController.check[0] == 1){
@@ -102,8 +86,6 @@ export class ButtonController extends Component {
         this.GameView.isGameOver = false;
         this.GameView.btnTryAgain.active = false;
         this.GameView.bgGameOver.node.active = false;
-        // this.GameController.gameStart();
-        // this.GameView.isGameOver = false;
     }
 }
 
