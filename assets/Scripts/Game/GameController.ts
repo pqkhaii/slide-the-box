@@ -2,7 +2,7 @@ import { _decorator, BoxCollider2D, CCInteger, Collider2D, Component, director, 
 import { BoxController } from './BoxController';
 import { GameView } from './GameView';
 import { ButtonController } from './ButtonController';
-import { SoundController } from './SoundController';
+import { AudioController } from './AudioController';
 
 const { ccclass, property } = _decorator;
 
@@ -12,8 +12,8 @@ export class GameController extends Component {
     @property({type: BoxController})
     private boxController: BoxController;
 
-    @property({type:SoundController})
-    private SoundController: SoundController;
+    @property({type:AudioController})
+    private AudioController: AudioController;
 
     // @property({type: ResultController})
     // private ResultController: ResultController
@@ -51,7 +51,7 @@ export class GameController extends Component {
     }
 
     protected gameOver(): void {
-        this.SoundController.onAudio(0);
+        this.AudioController.onAudio(0);
         director.pause();
         this.GameView.showGameOver();
     }

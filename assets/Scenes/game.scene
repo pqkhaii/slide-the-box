@@ -27,9 +27,6 @@
         "__id__": 108
       },
       {
-        "__id__": 110
-      },
-      {
         "__id__": 86
       },
       {
@@ -39,7 +36,7 @@
     "_active": true,
     "_components": [],
     "_prefab": {
-      "__id__": 112
+      "__id__": 110
     },
     "_lpos": {
       "__type__": "cc.Vec3",
@@ -70,7 +67,7 @@
     },
     "autoReleaseAssets": false,
     "_globals": {
-      "__id__": 113
+      "__id__": 111
     },
     "_id": "c89e6b6a-27e8-4b3b-bff7-1bf66f66b4c5"
   },
@@ -1556,7 +1553,7 @@
     },
     "component": "",
     "_componentId": "df3bbFIdoFEpZqpe2hGavmJ",
-    "handler": "onTouchOnAudio",
+    "handler": "onTouchOffAudio",
     "customEventData": ""
   },
   {
@@ -1618,7 +1615,7 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 142.685,
+      "x": 250,
       "y": 440,
       "z": 0
     },
@@ -1884,7 +1881,7 @@
     },
     "component": "",
     "_componentId": "df3bbFIdoFEpZqpe2hGavmJ",
-    "handler": "onTouchOffAudio",
+    "handler": "onTouchOnAudio",
     "customEventData": ""
   },
   {
@@ -1899,7 +1896,7 @@
     "_alignFlags": 33,
     "_target": null,
     "_left": 0,
-    "_right": -192.685,
+    "_right": -300,
     "_top": -460,
     "_bottom": 0,
     "_horizontalCenter": 0,
@@ -1952,7 +1949,7 @@
     "ResultController": {
       "__id__": 53
     },
-    "SoundController": {
+    "AudioController": {
       "__id__": 79
     },
     "GameView": {
@@ -1966,6 +1963,12 @@
     },
     "btnRight": {
       "__id__": 24
+    },
+    "btnOnAudio": {
+      "__id__": 33
+    },
+    "btnOffAudio": {
+      "__id__": 42
     },
     "_id": "1ceJOsoy9E86A0XLBf+pH7"
   },
@@ -2199,7 +2202,7 @@
         "__id__": 67
       }
     ],
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 75
@@ -2900,6 +2903,9 @@
         "__expectedType__": "cc.AudioClip"
       }
     ],
+    "ButtonController": {
+      "__id__": 52
+    },
     "_id": "d3lrjGuxRHz5L/YL01TJP5"
   },
   {
@@ -3795,61 +3801,6 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "@HandleCaller",
-    "_objFlags": 0,
-    "_parent": {
-      "__id__": 1
-    },
-    "_children": [],
-    "_active": false,
-    "_components": [
-      {
-        "__id__": 109
-      }
-    ],
-    "_prefab": null,
-    "_lpos": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_lrot": {
-      "__type__": "cc.Quat",
-      "x": 0,
-      "y": 0,
-      "z": 0,
-      "w": 1
-    },
-    "_lscale": {
-      "__type__": "cc.Vec3",
-      "x": 1,
-      "y": 1,
-      "z": 1
-    },
-    "_mobility": 0,
-    "_layer": 1073741824,
-    "_euler": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_id": "a4P9JEfW9Bk6ebvQ4Nr2vB"
-  },
-  {
-    "__type__": "ec5b4t6AaRJBIFEZF/oDk2L",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 108
-    },
-    "_enabled": true,
-    "__prefab": null,
-    "_id": "5aspvi405AspVB6ysGGxqE"
-  },
-  {
-    "__type__": "cc.Node",
     "_name": "@GameController",
     "_objFlags": 0,
     "_parent": {
@@ -3859,7 +3810,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 111
+        "__id__": 109
       }
     ],
     "_prefab": null,
@@ -3897,14 +3848,14 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 110
+      "__id__": 108
     },
     "_enabled": true,
     "__prefab": null,
     "boxController": {
       "__id__": 13
     },
-    "SoundController": {
+    "AudioController": {
       "__id__": 79
     },
     "GameView": {
@@ -3926,22 +3877,22 @@
   {
     "__type__": "cc.SceneGlobals",
     "ambient": {
-      "__id__": 114
+      "__id__": 112
     },
     "shadows": {
-      "__id__": 115
+      "__id__": 113
     },
     "_skybox": {
-      "__id__": 116
+      "__id__": 114
     },
     "fog": {
-      "__id__": 117
+      "__id__": 115
     },
     "octree": {
-      "__id__": 118
+      "__id__": 116
     },
     "lightProbeInfo": {
-      "__id__": 119
+      "__id__": 117
     },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false

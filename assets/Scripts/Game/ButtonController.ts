@@ -1,11 +1,11 @@
-import { _decorator, Component, director, instantiate, Node, Prefab, randomRangeInt } from 'cc';
+import { _decorator, Component, director, instantiate, Node, Prefab, randomRangeInt, sys } from 'cc';
 import { BoxController } from './BoxController';
 import { ResultController } from './ResultController';
 import { Constants } from './Constants';
 import { GameController } from './GameController';
 import { GameView } from './GameView';
 import { GameModel } from './GameModel';
-import { SoundController } from './SoundController';
+import { AudioController } from './AudioController';
 const { ccclass, property } = _decorator;
 
 @ccclass('ButtonController')
@@ -17,8 +17,8 @@ export class ButtonController extends Component {
     @property({type: ResultController})
     private ResultController: ResultController;
 
-    @property({type:SoundController})
-    private SoundController: SoundController;
+    @property({type: AudioController})
+    private AudioController: AudioController;
 
     // @property({type: GameController})
     // private GameController: GameController;
@@ -34,6 +34,15 @@ export class ButtonController extends Component {
 
     @property({type: Node})
     private btnRight: Node;
+
+    @property({type: Node})
+    public btnOnAudio: Node;
+
+    @property({type: Node})
+    public btnOffAudio: Node;
+
+    public variableVolume: number;
+    public variableVolumeArray: number[] = [];
   
     protected onLoad(): void {
         this.btnLeft.active = false;
@@ -41,12 +50,22 @@ export class ButtonController extends Component {
     }
 
     protected start(): void {
+        this.btnOffAudio.active = false;
+        this.btnOnAudio.active = true;
 
         //delay button right - left
         this.schedule(()=>{
             this.btnLeft.active = true;
             this.btnRight.active = true;
         },2.5,5)
+
+        //-----handle audio
+        var getVolume = sys.localStorage.getItem(Constants.keyVolume);
+        
+        if(getVolume){
+            this.variableVolumeArray = JSON.parse(getVolume);
+            localStorage.setItem(Constants.keyScore, JSON.stringify(Constants.keyVolume))
+        }
     }
 
     protected onTouchLeft(event:Event , customEventData: String): void {
@@ -61,11 +80,11 @@ export class ButtonController extends Component {
             this.ResultController.addScore();
         }
         else{
-            console.log("You lost!")
+            // console.log("You lost!")
             this.GameView.isGameOver = true;
         }
 
-        this.SoundController.onAudio(1);
+        this.AudioController.onAudio(1);
     }
 
     protected onTouchRight(): void {
@@ -80,11 +99,11 @@ export class ButtonController extends Component {
             this.ResultController.addScore();
         }
         else{
-            console.log("You lost!")
+            // console.log("You lost!")
             this.GameView.isGameOver = true;
         }
 
-        this.SoundController.onAudio(1);
+        this.AudioController.onAudio(1);
     }
 
     protected onTouchTryAgain(): void {
@@ -97,11 +116,33 @@ export class ButtonController extends Component {
     }
 
     protected onTouchOnAudio(): void {
-        this.SoundController.settingAudio(1);
+        this.variableVolume = 1;
+        this.variableVolumeArray.push(this.variableVolume);
+
+        sys.localStorage.setItem(Constants.keyVolume, JSON.stringify(this.variableVolumeArray));
+        var getVolume = JSON.parse(sys.localStorage.getItem(Constants.keyVolume));
+        var Volume = getVolume.reverse()[0]
+
+        this.AudioController.settingAudio(Volume);
+
+        this.btnOffAudio.active = false;
+        this.btnOnAudio.active = true;
     }
 
     protected onTouchOffAudio(): void {
-        this.SoundController.settingAudio(0);
+        this.variableVolume = 0;
+
+        this.variableVolumeArray.push(this.variableVolume);
+
+        sys.localStorage.setItem(Constants.keyVolume, JSON.stringify(this.variableVolumeArray));
+        var getVolume = JSON.parse(sys.localStorage.getItem(Constants.keyVolume));
+        var Volume = getVolume.reverse()[0]
+
+        this.AudioController.settingAudio(Volume);
+        console.log(getVolume.reverse()[0])
+
+        this.btnOffAudio.active = true;
+        this.btnOnAudio.active = false;
     }
 }
 
