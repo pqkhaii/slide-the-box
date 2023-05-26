@@ -2,10 +2,10 @@ import { _decorator, Component, director, instantiate, Node, Prefab, randomRange
 import { BoxController } from './BoxController';
 import { ResultController } from './ResultController';
 import { Constants } from './Constants';
-import { GameController } from './GameController';
 import { GameView } from './GameView';
 import { GameModel } from './GameModel';
 import { AudioController } from './AudioController';
+
 const { ccclass, property } = _decorator;
 
 @ccclass('ButtonController')
@@ -19,9 +19,6 @@ export class ButtonController extends Component {
 
     @property({type: AudioController})
     private AudioController: AudioController;
-
-    // @property({type: GameController})
-    // private GameController: GameController;
 
     @property({type: GameView})
     private GameView: GameView;
@@ -42,7 +39,7 @@ export class ButtonController extends Component {
     public btnOffAudio: Node;
 
     public variableVolume: number;
-    public variableVolumeArray: number[] = [];
+    public variableVolumeArray: number[] = [1];
   
     protected onLoad(): void {
         this.btnLeft.active = false;
@@ -64,7 +61,7 @@ export class ButtonController extends Component {
         
         if(getVolume){
             this.variableVolumeArray = JSON.parse(getVolume);
-            localStorage.setItem(Constants.keyScore, JSON.stringify(Constants.keyVolume))
+            localStorage.setItem(Constants.keyVolume, JSON.stringify(this.variableVolumeArray))
         }
     }
 
@@ -118,6 +115,7 @@ export class ButtonController extends Component {
     protected onTouchOnAudio(): void {
         this.variableVolume = 1;
         this.variableVolumeArray.push(this.variableVolume);
+        console.log( this.variableVolumeArray)
 
         sys.localStorage.setItem(Constants.keyVolume, JSON.stringify(this.variableVolumeArray));
         var getVolume = JSON.parse(sys.localStorage.getItem(Constants.keyVolume));
@@ -143,6 +141,10 @@ export class ButtonController extends Component {
 
         this.btnOffAudio.active = true;
         this.btnOnAudio.active = false;
+    }
+
+    protected onTouchHome(): void {
+        director.loadScene(Constants.sceneEntry)
     }
 }
 
