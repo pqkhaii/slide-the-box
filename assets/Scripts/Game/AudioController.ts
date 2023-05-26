@@ -1,6 +1,7 @@
 import { _decorator, AudioClip, AudioSource, Component, Node, sys } from 'cc';
-import { ButtonController } from './ButtonController';
+// import { ButtonController } from './ButtonController';
 import { Constants } from './Constants';
+import { GameModel } from './GameModel';
 
 const { ccclass, property } = _decorator;
 
@@ -16,8 +17,8 @@ export class AudioController extends Component {
     })
     private clips: AudioClip[] = [];
 
-    @property({type:ButtonController})
-    private ButtonController: ButtonController
+    // @property({type:GameModel})
+    // private GameModel: GameModel
 
     protected onLoad(): void {
         const _audioSource = this.audioSource.node.getComponent(AudioSource!);
@@ -25,20 +26,20 @@ export class AudioController extends Component {
     }
 
     protected start(): void {
-        //-----handle load audio
-        var getVolume = sys.localStorage.getItem(Constants.keyVolume);
+        // //-----handle load audio
+        // var getVolume = sys.localStorage.getItem(Constants.keyVolume);
 
-        var convertVolume = parseInt([...getVolume].reverse()[1]);
-        this.settingAudio(convertVolume);
+        // var convertVolume = parseInt([...getVolume].reverse()[1]);
+        // this.settingAudio(convertVolume);
 
-        if(convertVolume === 1){
-            this.ButtonController.btnOffAudio.active = false;
-            this.ButtonController.btnOnAudio.active = true;
-        }
-        else{
-            this.ButtonController.btnOffAudio.active = true;
-            this.ButtonController.btnOnAudio.active = false;
-        }
+        // if(convertVolume === 1){
+        //     this.GameModel.btnOffAudio.active = false;
+        //     this.GameModel.btnOnAudio.active = true;
+        // }
+        // else{
+        //     this.GameModel.btnOffAudio.active = true;
+        //     this.GameModel.btnOnAudio.active = false;
+        // }
     }
 
     public onAudio(index: number): void {
@@ -49,6 +50,7 @@ export class AudioController extends Component {
     public settingAudio(n: number): void {
         this.audioSource.volume = n;
     }
+
     
 }
 

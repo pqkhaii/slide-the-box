@@ -10,7 +10,7 @@ export class ResultController extends Component {
     private labelScore: Label;
 
     @property({type: Label})
-    public labelHighScore: Label;
+    private labelHighScore: Label;
 
     private scoreArray: number[] = [0];
     

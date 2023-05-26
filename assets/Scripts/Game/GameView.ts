@@ -1,6 +1,7 @@
 import { _decorator, CCInteger, Component, Label, Node, Sprite } from 'cc';
 import { GameModel } from './GameModel';
 import { ResultController } from './ResultController';
+import { GameController } from './GameController';
 
 const { ccclass, property } = _decorator;
 
@@ -9,23 +10,29 @@ export class GameView extends Component {
 
     @property({type: Label})
     private labelTimer: Label;
-
-    @property({type: Node})
-    public btnTryAgain: Node;
-
-    @property({type: Sprite})
-    public bgGameOver: Sprite = null;
     
     @property({type: ResultController})
     private ResultController: ResultController;
    
-    @property({type: GameModel})
+    @property({ type: GameModel })
     private GameModel: GameModel;
 
-    public isGameOver: boolean = false;
+    protected onLoad(): void {
+        if(this.GameModel.btnLeft && this.GameModel.btnRight){
+
+            this.GameModel.btnLeft.active = false;
+            this.GameModel.btnRight.active = false;
+        }
+    }
 
     protected start(): void {
         this.labelTimer.node.active = false;
+
+        // delay button right - left
+        this.schedule(()=>{
+            this.GameModel.btnLeft.active = true;
+            this.GameModel.btnRight.active = true;
+        },2.5)
     }
 
     update(deltaTime: number) {
@@ -45,13 +52,14 @@ export class GameView extends Component {
         }
         
         if(this.GameModel.timer == 0){
-            this.isGameOver = true;
+            this.GameModel.isGameOVer = true;
         }
     }
 
+    //Show: result, button TryAgain, background OverGame
     public showGameOver():void {
-        this.btnTryAgain.active = true;
-        this.bgGameOver.node.active = true;
+        this.GameModel.btnTryAgain.active = true;
+        this.GameModel.bgGameOver.node.active = true;
         this.ResultController.showResults();
     }
 }
