@@ -1,7 +1,7 @@
 import { _decorator, Component, instantiate, Node, Prefab, randomRange, randomRangeInt, Sprite } from 'cc';
-const { ccclass, property } = _decorator;
-
 import { Constants } from './Constants';
+
+const { ccclass, property } = _decorator;
 
 @ccclass('BoxController')
 export class BoxController extends Component {
@@ -15,29 +15,11 @@ export class BoxController extends Component {
     public boxNode: Node = null;
 
     public box: Node[] = [];
+    public check: number[] = [];
     
     private boxNew: Node;
 
-    public check: number[] = [];
-
-    protected start(): void {
-        // this.createBox();
-    }
-
-    protected update(deltaTime: number): void {
-        // for(let i = 0; i<Constants.numberOfBox; i++){
-        //     var posX = this.box[i].position.x;          
-        //     var posY = this.box[i].position.y;
-            
-        //     posX = 0
-        //     posY -=10;
-
-        //     this.box[i].setPosition(posX, posY, 0);
-        // }
-    }
-
     public createBox(): void {
-        
         let i = 0;
 
         this.schedule(() => {

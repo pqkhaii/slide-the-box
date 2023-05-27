@@ -10,8 +10,27 @@ export class ResultController extends Component {
     private labelScore: Label;
 
     @property({type: Label})
-    private labelHighScore: Label;
+    private LabelHighScore: Label;
 
+    public get labelHighScore() : Label {
+        return this.LabelHighScore;
+    }
+    
+    public set labelHighScore(value : Label) {
+        this.LabelHighScore = value;
+    }
+
+    @property({type: Label})
+    private LabelGameOver: Label;
+
+    public get labelGameOver() : Label {
+        return this.LabelGameOver;
+    }
+    
+    public set labelGameOver(value : Label) {
+        this.LabelGameOver = value;
+    }
+    
     private scoreArray: number[] = [0];
     
     maxScore: number = 0;
@@ -25,7 +44,8 @@ export class ResultController extends Component {
             localStorage.setItem(Constants.keyScore, JSON.stringify(this.scoreArray))
         }
 
-        this.labelHighScore.node.active = false;
+        // this.labelHighScore.node.active = false;
+        // this.LabelGameOver.node.active = false;
     }
 
     protected updateScore(num: number): void {
@@ -45,7 +65,8 @@ export class ResultController extends Component {
 
         this.labelHighScore.string = `HIGH SCORE: ${Math.max(...getScore)}`;
         
-        this.labelHighScore.node.active = true;
+        // this.labelHighScore.node.active = true;
+        // this.LabelGameOver.node.active = true;
     }
 
 }

@@ -44,10 +44,18 @@ export class GameModel extends Component {
     }
 
     @property({type: Node})
-    private btnOnAudio: Node;
+    private BtnOnAudio: Node;
 
     @property({type: Node})
-    private btnOffAudio: Node;
+    private BtnOffAudio: Node;
+
+    public get btnOffAudio() : Node {
+        return this.BtnOffAudio;
+    }
+
+    public set btnOffAudio(value : Node) {
+        this.BtnOffAudio = value;
+    }
 
     @property({type: Node})
     private BtnTryAgain: Node;
@@ -75,6 +83,8 @@ export class GameModel extends Component {
     private variableVolumeArray: number[] = [1];
 
     private isGameOver: boolean = false;
+
+    private convertVolume: number;
     
     public get isGameOVer(): boolean {
         return this.isGameOver;
@@ -94,16 +104,17 @@ export class GameModel extends Component {
         }
 
         //-----handle load when clicked on/off audio
-        var convertVolume = parseInt([...getVolume].reverse()[1]);
-        this.AudioController.settingAudio(convertVolume);
+        this.convertVolume = parseInt([...getVolume].reverse()[1]);
+        this.AudioController.settingAudio(this.convertVolume);
+        console.log(this.convertVolume)
 
-        if(convertVolume === 1){
-            this.btnOffAudio.active = false;
-            this.btnOnAudio.active = true;
+        if(this.convertVolume === 1){
+            this.BtnOffAudio.active = false;
+            this.BtnOnAudio.active = true;
         }
         else{
-            this.btnOffAudio.active = true;
-            this.btnOnAudio.active = false;
+            this.BtnOffAudio.active = true;
+            this.BtnOnAudio.active = false;
         }
     }
 
@@ -164,8 +175,8 @@ export class GameModel extends Component {
 
         this.AudioController.settingAudio(Volume);
 
-        this.btnOffAudio.active = false;
-        this.btnOnAudio.active = true;
+        this.BtnOffAudio.active = false;
+        this.BtnOnAudio.active = true;
     }
 
     protected onTouchOffAudio(): void {
@@ -179,8 +190,8 @@ export class GameModel extends Component {
         this.AudioController.settingAudio(Volume);
         console.log(getVolume.reverse()[0])
 
-        this.btnOffAudio.active = true;
-        this.btnOnAudio.active = false;
+        this.BtnOffAudio.active = true;
+        this.BtnOnAudio.active = false;
     }
 
     protected onTouchHome(): void {

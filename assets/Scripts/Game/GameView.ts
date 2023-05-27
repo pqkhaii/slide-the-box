@@ -17,11 +17,12 @@ export class GameView extends Component {
     private GameModel: GameModel;
 
     protected onLoad(): void {
-        if(this.GameModel.btnLeft && this.GameModel.btnRight){
+        this.GameModel.btnLeft.active = false;
+        this.GameModel.btnRight.active = false;
+        this.GameModel.btnOffAudio.active = false;
 
-            this.GameModel.btnLeft.active = false;
-            this.GameModel.btnRight.active = false;
-        }
+        this.ResultController.labelHighScore.node.active = false;
+        this.ResultController.labelGameOver.node.active = false;
     }
 
     protected start(): void {
@@ -59,6 +60,9 @@ export class GameView extends Component {
     public showGameOver():void {
         this.GameModel.btnTryAgain.active = true;
         this.GameModel.bgGameOver.node.active = true;
+
+        this.ResultController.labelHighScore.node.active = true;
+        this.ResultController.labelGameOver.node.active = true;
         this.ResultController.showResults();
     }
 }
