@@ -106,7 +106,6 @@ export class GameModel extends Component {
         //-----handle load when clicked on/off audio
         this.convertVolume = parseInt([...getVolume].reverse()[1]);
         this.AudioController.settingAudio(this.convertVolume);
-        console.log(this.convertVolume)
 
         if(this.convertVolume === 1){
             this.BtnOffAudio.active = false;
@@ -188,7 +187,6 @@ export class GameModel extends Component {
         var Volume = getVolume.reverse()[0]
 
         this.AudioController.settingAudio(Volume);
-        console.log(getVolume.reverse()[0])
 
         this.BtnOffAudio.active = true;
         this.BtnOnAudio.active = false;

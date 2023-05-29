@@ -12,11 +12,31 @@ export class BoxController extends Component {
     private boxRight: Prefab = null;
 
     @property({type: Node})
-    public boxNode: Node = null;
+    private boxNode: Node = null;
 
-    public box: Node[] = [];
-    public check: number[] = [];
+    private Box: Node[] = [];
+
     
+    public get box() : Node[] {
+        return this.Box
+    }
+    
+    
+    public set value(value : Node[]) {
+        this.Box = value;
+    }
+
+    private Check: number[] = [];
+    
+    public get check() : number[] {
+        return this.Check;
+    }
+    
+    
+    public set check(value : number[]) {
+        this.Check = value;
+    }
+
     private boxNew: Node;
 
     public createBox(): void {
@@ -27,14 +47,14 @@ export class BoxController extends Component {
             let random = randomRangeInt(1,5);
 
             if(random === 1 || random === 3 || random === 5){
-                this.box[i] = instantiate(this.boxLeft);
-                this.boxNode.addChild(this.box[i]);
-                this.check.push(1);
+                this.Box[i] = instantiate(this.boxLeft);
+                this.boxNode.addChild(this.Box[i]);
+                this.Check.push(1);
             }
             else{
-                this.box[i] = instantiate(this.boxRight);
-                this.boxNode.addChild(this.box[i]);
-                this.check.push(0);
+                this.Box[i] = instantiate(this.boxRight);
+                this.boxNode.addChild(this.Box[i]);
+                this.Check.push(0);
             }
         }, 0.3, Constants.numberOfBox);
         
@@ -72,12 +92,12 @@ export class BoxController extends Component {
         if(random === 1 || random === 3 || random === 5){
             this.boxNew = instantiate(this.boxLeft);
             this.boxNode.addChild(this.boxNew);
-            this.check.push(1);
+            this.Check.push(1);
         }
         else{
             this.boxNew = instantiate(this.boxRight);
             this.boxNode.addChild(this.boxNew);
-            this.check.push(0);
+            this.Check.push(0);
         }
         
         var posX = this.boxNew.position.x;           

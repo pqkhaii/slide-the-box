@@ -35,9 +35,7 @@ export class GameController extends Component {
     protected gameStart(): void {
         this.boxController.createBox();
         this.GameView.countDown();
-
-        this.GameModel.btnTryAgain.active = false;
-        this.GameModel.bgGameOver.node.active = false;
+        this.GameView.hideResults();
     }
 
     protected gameOver(): void {

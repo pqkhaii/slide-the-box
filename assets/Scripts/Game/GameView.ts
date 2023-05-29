@@ -35,7 +35,7 @@ export class GameView extends Component {
         },2.5)
     }
 
-    update(deltaTime: number) {
+    protected update(deltaTime: number): void {
         this.checkOverTime();
     }
 
@@ -57,13 +57,19 @@ export class GameView extends Component {
     }
 
     //Show: result, button TryAgain, background OverGame
-    public showGameOver():void {
+    public showGameOver(): void {
         this.GameModel.btnTryAgain.active = true;
         this.GameModel.bgGameOver.node.active = true;
 
         this.ResultController.labelHighScore.node.active = true;
         this.ResultController.labelGameOver.node.active = true;
         this.ResultController.showResults();
+    }
+
+    //hide results
+    public hideResults(): void {
+        this.GameModel.btnTryAgain.active = false;
+        this.GameModel.bgGameOver.node.active = false;
     }
 }
 

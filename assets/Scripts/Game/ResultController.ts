@@ -33,8 +33,8 @@ export class ResultController extends Component {
     
     private scoreArray: number[] = [0];
     
-    maxScore: number = 0;
-    currentScore: number = 0;
+    private maxScore: number = 0;
+    private currentScore: number = 0;
 
     protected start(): void {
         var getScore = sys.localStorage.getItem(Constants.keyScore);
@@ -43,13 +43,10 @@ export class ResultController extends Component {
             this.scoreArray = JSON.parse(getScore);
             localStorage.setItem(Constants.keyScore, JSON.stringify(this.scoreArray))
         }
-
-        // this.labelHighScore.node.active = false;
-        // this.LabelGameOver.node.active = false;
     }
 
-    protected updateScore(num: number): void {
-        this.currentScore = num;
+    protected updateScore(number: number): void {
+        this.currentScore = number;
         this.labelScore.string = this.currentScore.toString();
     }
     
@@ -64,10 +61,6 @@ export class ResultController extends Component {
         var getScore = JSON.parse(sys.localStorage.getItem(Constants.keyScore));
 
         this.labelHighScore.string = `HIGH SCORE: ${Math.max(...getScore)}`;
-        
-        // this.labelHighScore.node.active = true;
-        // this.LabelGameOver.node.active = true;
     }
-
 }
 

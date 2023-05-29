@@ -9,10 +9,9 @@ export class Constants extends Component {
     public static readonly keyVolume: string = 'volume';
 
     public static readonly sceneEntry: string = 'Entry';
-
     public static readonly sceneGame: string = 'Game';
 
-    public static readonly MyNode: string = 'MyNode';
+    // public static readonly MyNode: string = 'MyNode';
 
     // public static readonly Timer: number = 5;
 }
