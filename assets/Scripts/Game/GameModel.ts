@@ -104,16 +104,18 @@ export class GameModel extends Component {
         }
 
         //-----handle load when clicked on/off audio
-        this.convertVolume = parseInt([...getVolume].reverse()[1]);
-        this.AudioController.settingAudio(this.convertVolume);
+        // this.convertVolume = parseInt([...getVolume].reverse()[1]);
+        this.convertVolume = this.variableVolumeArray.reverse()[0];
 
         if(this.convertVolume === 1){
             this.BtnOffAudio.active = false;
             this.BtnOnAudio.active = true;
+            this.AudioController.settingAudio(this.convertVolume);
         }
-        else{
+        if(this.convertVolume === 0){
             this.BtnOffAudio.active = true;
             this.BtnOnAudio.active = false;
+            this.AudioController.settingAudio(this.convertVolume);
         }
     }
 
@@ -170,7 +172,7 @@ export class GameModel extends Component {
 
         sys.localStorage.setItem(Constants.keyVolume, JSON.stringify(this.variableVolumeArray));
         var getVolume = JSON.parse(sys.localStorage.getItem(Constants.keyVolume));
-        var Volume = getVolume.reverse()[0]
+        var Volume = getVolume.reverse()[0];
 
         this.AudioController.settingAudio(Volume);
 
@@ -184,7 +186,7 @@ export class GameModel extends Component {
 
         sys.localStorage.setItem(Constants.keyVolume, JSON.stringify(this.variableVolumeArray));
         var getVolume = JSON.parse(sys.localStorage.getItem(Constants.keyVolume));
-        var Volume = getVolume.reverse()[0]
+        var Volume = getVolume.reverse()[0];
 
         this.AudioController.settingAudio(Volume);
 

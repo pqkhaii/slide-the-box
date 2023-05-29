@@ -42,6 +42,8 @@ export class GameController extends Component {
         this.AudioController.onAudio(0);
         director.pause();
         this.GameView.showGameOver();
+        this.GameModel.btnLeft.active = false;
+        this.GameModel.btnRight.active = false;
     }
 }
 

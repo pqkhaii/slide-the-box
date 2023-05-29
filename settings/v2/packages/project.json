@@ -5,7 +5,7 @@
     "designResolution": {
       "width": 640,
       "height": 960,
-      "fitHeight": false,
+      "fitHeight": true,
       "fitWidth": false
     }
   }

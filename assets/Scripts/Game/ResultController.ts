@@ -33,7 +33,6 @@ export class ResultController extends Component {
     
     private scoreArray: number[] = [0];
     
-    private maxScore: number = 0;
     private currentScore: number = 0;
 
     protected start(): void {

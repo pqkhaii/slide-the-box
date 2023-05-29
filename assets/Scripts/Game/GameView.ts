@@ -19,6 +19,7 @@ export class GameView extends Component {
     protected onLoad(): void {
         this.GameModel.btnLeft.active = false;
         this.GameModel.btnRight.active = false;
+        
         this.GameModel.btnOffAudio.active = false;
 
         this.ResultController.labelHighScore.node.active = false;
