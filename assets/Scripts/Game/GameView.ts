@@ -20,7 +20,7 @@ export class GameView extends Component {
         this.GameModel.btnLeft.active = false;
         this.GameModel.btnRight.active = false;
         
-        this.GameModel.btnOffAudio.active = false;
+        this.GameModel.btnOffAudio.node.active = false;
 
         this.ResultController.labelHighScore.node.active = false;
         this.ResultController.labelGameOver.node.active = false;
@@ -59,7 +59,7 @@ export class GameView extends Component {
 
     //Show: result, button TryAgain, background OverGame
     public showGameOver(): void {
-        this.GameModel.btnTryAgain.active = true;
+        this.GameModel.btnTryAgain.node.active = true;
         this.GameModel.bgGameOver.node.active = true;
 
         this.ResultController.labelHighScore.node.active = true;
@@ -69,7 +69,7 @@ export class GameView extends Component {
 
     //hide results
     public hideResults(): void {
-        this.GameModel.btnTryAgain.active = false;
+        this.GameModel.btnTryAgain.node.active = false;
         this.GameModel.bgGameOver.node.active = false;
     }
 }

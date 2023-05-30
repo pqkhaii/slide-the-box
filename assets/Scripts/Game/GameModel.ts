@@ -1,4 +1,4 @@
-import { _decorator, CCInteger, Component, director, Node, Sprite, sys } from 'cc';
+import { _decorator, Button, CCInteger, Component, director, find, game, Node, Sprite, sys } from 'cc';
 import { BoxController } from './BoxController';
 import { ResultController } from './ResultController';
 import { AudioController } from './AudioController';
@@ -43,28 +43,36 @@ export class GameModel extends Component {
         this.BtnRight = value;
     }
 
-    @property({type: Node})
-    private BtnOnAudio: Node;
+    @property({type: Button})
+    private BtnOnAudio: Button;
 
-    @property({type: Node})
-    private BtnOffAudio: Node;
+    public get btnOnAudio() : Button {
+        return this.BtnOnAudio;
+    }
 
-    public get btnOffAudio() : Node {
+    public set btnOnAudio(value : Button) {
+        this.BtnOnAudio = value;
+    }
+
+    @property({type: Button})
+    private BtnOffAudio: Button;
+
+    public get btnOffAudio() : Button {
         return this.BtnOffAudio;
     }
 
-    public set btnOffAudio(value : Node) {
+    public set btnOffAudio(value : Button) {
         this.BtnOffAudio = value;
     }
 
-    @property({type: Node})
-    private BtnTryAgain: Node;
+    @property({type: Button})
+    private BtnTryAgain: Button;
     
-    public get btnTryAgain() : Node {
+    public get btnTryAgain() : Button {
         return this.BtnTryAgain;
     }
 
-    public set btnTryAgain(value : Node) {
+    public set btnTryAgain(value : Button) {
         this.BtnTryAgain = value;
     }
 
@@ -80,18 +88,23 @@ export class GameModel extends Component {
     }
 
     private variableVolume: number;
-    private variableVolumeArray: number[] = [1];
+    private variableVolumeArray: number[] = [];
 
-    private isGameOver: boolean = false;
+    private IsGameOver: boolean = false;
 
     private convertVolume: number;
     
     public get isGameOVer(): boolean {
-        return this.isGameOver;
+        return this.IsGameOver;
     }
     
     public set isGameOVer(value : boolean) {
-        this.isGameOver = value;
+        this.IsGameOver = value;
+    }
+
+    protected onLoad(): void {
+        director.resume();
+        this.IsGameOver = false;
     }
     
     protected start(): void {
@@ -102,24 +115,28 @@ export class GameModel extends Component {
             this.variableVolumeArray = JSON.parse(getVolume);
             localStorage.setItem(Constants.keyVolume, JSON.stringify(this.variableVolumeArray))
         }
+        else {
+            this.BtnOffAudio.node.active = false;
+            this.BtnOnAudio.node.active = true;
+            this.AudioController.settingAudio(1);
+        }
 
         //-----handle load when clicked on/off audio
-        // this.convertVolume = parseInt([...getVolume].reverse()[1]);
-        this.convertVolume = this.variableVolumeArray.reverse()[0];
+        this.convertVolume = this.variableVolumeArray[this.variableVolumeArray.length - 1];
 
         if(this.convertVolume === 1){
-            this.BtnOffAudio.active = false;
-            this.BtnOnAudio.active = true;
+            this.BtnOffAudio.node.active = false;
+            this.BtnOnAudio.node.active = true;
             this.AudioController.settingAudio(this.convertVolume);
         }
-        if(this.convertVolume === 0){
-            this.BtnOffAudio.active = true;
-            this.BtnOnAudio.active = false;
+        else if(this.convertVolume === 0){
+            this.BtnOffAudio.node.active = true;
+            this.BtnOnAudio.node.active = false;
             this.AudioController.settingAudio(this.convertVolume);
         }
     }
 
-    protected onTouchLeft(event:Event , customEventData: String): void {
+    protected onTouchLeft(): void {
         if(this.BoxController.check[0] == 1){
             this.BoxController.box.shift();
             this.BoxController.box[0].destroy();
@@ -132,7 +149,7 @@ export class GameModel extends Component {
         }
         else{
             // console.log("You lost!")
-            this.isGameOver = true;
+            this.IsGameOver = true;
         }
 
         this.AudioController.onAudio(1);
@@ -151,7 +168,7 @@ export class GameModel extends Component {
         }
         else{
             // console.log("You lost!")
-            this.isGameOver = true;
+            this.IsGameOver = true;
         }
 
         this.AudioController.onAudio(1);
@@ -161,9 +178,10 @@ export class GameModel extends Component {
         director.resume();
         this.timer = 33;
         director.loadScene(Constants.sceneGame);
-        this.isGameOver = false;
-        this.BtnTryAgain.active = false;
+        this.IsGameOver = false;
+        this.BtnTryAgain.node.active = false;
         this.BgGameOver.node.active = false;
+        
     }
 
     protected onTouchOnAudio(): void {
@@ -171,13 +189,13 @@ export class GameModel extends Component {
         this.variableVolumeArray.push(this.variableVolume);
 
         sys.localStorage.setItem(Constants.keyVolume, JSON.stringify(this.variableVolumeArray));
-        var getVolume = JSON.parse(sys.localStorage.getItem(Constants.keyVolume));
-        var Volume = getVolume.reverse()[0];
+        // var getVolume = JSON.parse(sys.localStorage.getItem(Constants.keyVolume));
+        // var Volume = getVolume.reverse()[0];
 
-        this.AudioController.settingAudio(Volume);
+        this.AudioController.settingAudio(1);
 
-        this.BtnOffAudio.active = false;
-        this.BtnOnAudio.active = true;
+        this.BtnOffAudio.node.active = false;
+        this.BtnOnAudio.node.active = true;
     }
 
     protected onTouchOffAudio(): void {
@@ -185,17 +203,19 @@ export class GameModel extends Component {
         this.variableVolumeArray.push(this.variableVolume);
 
         sys.localStorage.setItem(Constants.keyVolume, JSON.stringify(this.variableVolumeArray));
-        var getVolume = JSON.parse(sys.localStorage.getItem(Constants.keyVolume));
-        var Volume = getVolume.reverse()[0];
+        // var getVolume = JSON.parse(sys.localStorage.getItem(Constants.keyVolume));
+        // var Volume = getVolume.reverse()[0];
 
-        this.AudioController.settingAudio(Volume);
+        this.AudioController.settingAudio(0);
 
-        this.BtnOffAudio.active = true;
-        this.BtnOnAudio.active = false;
+        this.BtnOffAudio.node.active = true;
+        this.BtnOnAudio.node.active = false;
     }
 
     protected onTouchHome(): void {
-        director.loadScene(Constants.sceneEntry)
+        
+        director.loadScene(Constants.sceneEntry);
+
     }
 }
 

@@ -1,4 +1,4 @@
-import { _decorator, Component, director} from 'cc';
+import { _decorator, Component, director, find} from 'cc';
 import { BoxController } from './BoxController';
 import { GameView } from './GameView';
 import { GameModel } from './GameModel';
@@ -33,12 +33,16 @@ export class GameController extends Component {
     }
 
     protected gameStart(): void {
+        this.GameModel.btnOffAudio.interactable = true;
+        this.GameModel.btnOnAudio.interactable = true;
         this.boxController.createBox();
         this.GameView.countDown();
         this.GameView.hideResults();
     }
 
     protected gameOver(): void {
+        this.GameModel.btnOffAudio.interactable = false;
+        this.GameModel.btnOnAudio.interactable = false;
         this.AudioController.onAudio(0);
         director.pause();
         this.GameView.showGameOver();
