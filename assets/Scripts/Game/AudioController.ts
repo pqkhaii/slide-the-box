@@ -11,8 +11,7 @@ export class AudioController extends Component {
     private clips: AudioClip[] = [];
 
     protected onLoad(): void {
-        const _audioSource = this.audioSource.node.getComponent(AudioSource!);
-        this.audioSource = _audioSource;
+        
     }
 
     public onAudio(index: number): void {

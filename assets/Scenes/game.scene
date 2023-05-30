@@ -159,8 +159,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 320,
-      "y": 479.99999999999994,
+      "x": 319.99999999999994,
+      "y": 480.00000000000006,
       "z": 0
     },
     "_lrot": {
@@ -2609,7 +2609,7 @@
     "_enabled": true,
     "__prefab": null,
     "_clip": {
-      "__uuid__": "90caf94f-677c-4f8f-96ee-e6ec24e92475",
+      "__uuid__": "7e896d2d-b707-4374-8bb6-8c64f2f24318",
       "__expectedType__": "cc.AudioClip"
     },
     "_loop": true,
@@ -3449,10 +3449,10 @@
     "__prefab": null,
     "_alignFlags": 45,
     "_target": null,
-    "_left": 0,
-    "_right": 0,
-    "_top": -5.684341886080802e-14,
-    "_bottom": -5.684341886080802e-14,
+    "_left": -5.684341886080802e-14,
+    "_right": -5.684341886080802e-14,
+    "_top": 5.684341886080802e-14,
+    "_bottom": 5.684341886080802e-14,
     "_horizontalCenter": 0,
     "_verticalCenter": 0,
     "_isAbsLeft": true,
